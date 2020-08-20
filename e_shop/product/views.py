@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import Category, Product
-from .serializers import ProductSerializer, CategorySerializer
+from .models import Category, Product, ProductImage
+from .serializers import ProductSerializer, CategorySerializer, ProductImageSerializer
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -24,9 +24,15 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     def get_serializer_context(self):
         return {'request': self.request}
 
+class ProductImageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageSerializer
+
+    def get_serializer_context(self):
+        return {'request': self.request}
+
 
 # TODO: related products in category details
-# TODO add views for images
 # TODO: add pagination
 # TODO add filtration
 # TODO add_to_cart
